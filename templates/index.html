@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Proyecto</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        
+        $(document).ready(function () {
+            var socket = io.connect();
+
+            socket.on('connect', function () {
+                socket.emit('my_event', { data: 'Te has conectado' });
+            });
+            socket.on('disconnect', function () {
+                $('#log').append('<br>Disconnected');
+            });
+            socket.on('my_response', function (msg) {
+                $('#log').append('<br>' + msg.data);
+                if(msg.data=="af1"){
+                    document.getElementById("foc").src="https://cdn-icons-png.flaticon.com/512/307/307105.png";
+                }
+                if(msg.data=="af2"){
+                    document.getElementById("foc1").src="https://cdn-icons-png.flaticon.com/512/307/307105.png";
+                    
+                }
+                if(msg.data=="ac1"){
+                    document.getElementById("con").src="https://cdn-icons-png.flaticon.com/512/4241/4241085.png";
+                }
+                if(msg.data=="ac2"){
+                    document.getElementById("con1").src="https://cdn-icons-png.flaticon.com/512/4241/4241085.png";
+                }
+                if(msg.data=="pc1"){
+                    document.getElementById("con").src="https://cdn-icons-png.flaticon.com/512/4241/4241115.png";
+                    
+                }
+                if(msg.data=="pc2"){
+                    document.getElementById("con1").src="https://cdn-icons-png.flaticon.com/512/4241/4241115.png";
+                }
+                if(msg.data=="pf1"){
+                    document.getElementById("foc").src="https://cdn-icons-png.flaticon.com/512/307/307136.png";
+                  //  document.getElementById("prt").src="https://cdn-icons-png.flaticon.com/512/307/307136.png";
+                }
+                if(msg.data=="pf2"){
+                    document.getElementById("foc1").src="https://cdn-icons-png.flaticon.com/512/307/307136.png";
+                }
+                if(msg.data=="apagaria"){
+                    document.getElementById("IAs").src="https://cdn-icons-png.flaticon.com/512/4529/4529991.png";
+                }
+                if(msg.data=="Encenderia"){
+                    document.getElementById("IAs").src="https://cdn-icons-png.flaticon.com/512/4529/4529980.png";
+                }
+                if(msg.data=="pm"){
+                    document.getElementById("motor").src="https://cdn-icons-png.flaticon.com/512/5557/5557392.png";
+                }
+                if(msg.data=="am"){
+                    document.getElementById("motor").src="https://cdn-icons-png.flaticon.com/512/5557/5557384.png";
+                }
+                if(msg.data=="pl"){
+                    document.getElementById("led").src="https://cdn-icons-png.flaticon.com/512/5830/5830898.png";
+                }
+                if(msg.data=="al"){
+                    document.getElementById("led").src="https://cdn-icons-png.flaticon.com/512/5830/5830738.png";
+                }
+                if(msg.data=="all"){
+                    document.getElementById("led").src="https://cdn-icons-png.flaticon.com/512/5830/5830738.png";
+                    document.getElementById("motor").src="https://cdn-icons-png.flaticon.com/512/5557/5557384.png";
+                    document.getElementById("con1").src="https://cdn-icons-png.flaticon.com/512/4241/4241085.png";
+                    document.getElementById("con").src="https://cdn-icons-png.flaticon.com/512/4241/4241085.png";
+                    document.getElementById("foc1").src="https://cdn-icons-png.flaticon.com/512/307/307105.png";
+                    document.getElementById("foc").src="https://cdn-icons-png.flaticon.com/512/307/307105.png";
+                }
+            });
+
+            $('form#emite').submit(function (event) {
+                
+                if(u==1){
+                    car="foco1";
+                    socket.emit('my_event', { data: car });
+                    u=0;
+                    return false;
+                }
+                if(u==0){
+                    car="foco1";
+                    socket.emit('my_broadcast_event', { data: car });
+                    u=1;
+                    return false;
+                }
+            });         
+            $('form#emite1').submit(function (event) {
+                
+                if(u1==1){
+                    car="foco2";
+                    socket.emit('my_event', { data: car });
+                    u1=0;
+                    return false;
+                }
+                if(u1==0){
+                    car="foco2";
+                    socket.emit('my_broadcast_event', { data: car });
+                    u1=1;
+                    return false;
+                }
+            });    
+            $('form#emite2').submit(function (event) {
+                
+                if(u2==1){
+                    car="contacto1";
+                    socket.emit('my_event', { data: car });
+                    u2=0;
+                    return false;
+                }
+                if(u2==0){
+                    car="contacto1";
+                    socket.emit('my_broadcast_event', { data: car });
+                    u2=1;
+                    return false;
+                }
+            });    
+            $('form#emite3').submit(function (event) {
+                
+                if(u3==1){
+                    car="contacto2";
+                    socket.emit('my_event', { data: car });
+                    u3=0;
+                    return false;
+                }
+                if(u3==0){
+                    car="contacto2";
+                    socket.emit('my_broadcast_event', { data: car });
+                    u3=1;
+                    return false;
+                }
+            });    
+            $('form#emite4').submit(function (event) {
+                
+                if(u4==1){
+                    car="motor";
+                    socket.emit('my_event', { data: car });
+                    u4=0;
+                    return false;
+                }
+                if(u4==0){
+                    car="motor";
+                    socket.emit('my_broadcast_event', { data: car });
+                    u4=1;
+                    return false;
+                }
+            });    
+            $('form#emite5').submit(function (event) {
+                
+                if(u5==1){
+                    car="led";
+                    socket.emit('my_event', { data: car });
+                    u5=0;
+                    return false;
+                }
+                if(u5==0){
+                    car="led";
+                    socket.emit('my_broadcast_event', { data: car });
+                    u5=1;
+                    return false;
+                }
+            });    
+            $('form#emite6').submit(function (event) {
+                
+                if(u6==1){
+                    car="IA";
+                    socket.emit('my_event', { data: car });
+                    u6=0;
+                    return false;
+                }
+                if(u6==0){
+                    car="IA";
+                    socket.emit('my_broadcast_event', { data: car });
+                    u6=1;
+                    return false;
+                }
+            });  
+            $('form#emite7').submit(function (event) {
+                    car="apagar";
+                    socket.emit('my_broadcast_event', { data: car });
+                    return false;
+        
+            });  
+        });
+
+       u=1;
+       u1=1;
+       u2=1;
+       u3=1;
+       u4=1;
+       u5=1;
+       u6=1;
+    </script>
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/foto-gratis/casa-aislada-campo_1303-23773.jpg?w=996&t=st=1674588074~exp=1674588674~hmac=b582167dae531eaeeb3e5fcf62e2b20bbfd323db77ed711381b3201d20c95043.jpg');
+            text-align:center;
+        }
+
+        .shadowbox {
+            display: inline-flex;
+        }
+
+        .cuadro {
+            margin-right: 10%;
+        }
+
+        .espacio{
+           
+            margin-top: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h1>Proyecto:Control domotico mediante IA</h1>
+            <h2>Seleccione el elemente a encender o apagar.
+            </h2>
+        </div>
+        <div class="shadowbox">
+            <div class="cuadro">
+                <form id="emite" >
+                    <input id="foc" type="image" src="https://cdn-icons-png.flaticon.com/512/307/307105.png" width="150" height="150">
+                </form>
+            </div>
+
+            <div class="cuadro">
+                <form id="emite1" >
+                    <input id="foc1" type="image" src="https://cdn-icons-png.flaticon.com/512/307/307105.png" width="150" height="150">
+                </form>
+            </div>
+            <div class="cuadro">
+                <form id="emite2" >
+                    <input id="con" type="image" src="https://cdn-icons-png.flaticon.com/512/4241/4241085.png" width="150" height="150">
+                </form>
+            </div>
+            <div class="cuadro">
+                <form id="emite3" >
+                    <input id="con1" type="image" src="https://cdn-icons-png.flaticon.com/512/4241/4241085.png" width="150" height="150">
+                </form>
+            </div>
+            
+
+        </div>
+
+    </div>
+    <div class="espacio"> </div>
+    <div class="shadowbox">
+        <div class="cuadro">
+            <form id="emite4" >
+                <input id="motor" type="image" src="https://cdn-icons-png.flaticon.com/512/5557/5557384.png" width="150" height="150">
+            </form>
+        </div>
+        <div class="cuadro">
+            <form id="emite5" >
+                <input id="led" type="image" src="https://cdn-icons-png.flaticon.com/512/5830/5830738.png" width="150" height="150">
+            </form>
+        </div>
+        <div class="cuadro">
+            <form id="emite6" >
+                <input id="IAs" type="image" src="https://cdn-icons-png.flaticon.com/512/4529/4529991.png" width="150" height="150">
+            </form>
+        </div>
+        <div class="cuadro">
+            <form id="emite7" >
+                <input id="apag" type="submit" value="Apagar">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
